@@ -6,30 +6,110 @@
     "closing": "Smart Living, Trusted Local Hands."
   },
   "meta": {
-    "home": { "title": "Mansoorah – Trusted Smart-Home Technicians in Oman", "description": "Book verified Omani technicians for smart locks, cameras, Wi-Fi and smart-home setup in Muscat, Al Batinah and Dhofar. Fixed prices in OMR, no hidden fees." },
-    "services": { "title": "Our Services – Smart Installations & Tech Maintenance | Mansoorah", "description": "Smart door locks, security cameras, video doorbells, smart lighting, Wi-Fi and gadget repairs at fixed OMR prices by verified Omani technicians." },
-    "service": { "title": "{service} in Oman – {price} fixed price | Mansoorah", "description": "{service} by a verified Omani technician. Fixed price {price}, no hidden fees, 7-day warranty. Book online in minutes." },
-    "book": { "title": "Choose Your Technician – {service} | Mansoorah", "description": "Select a verified technician, date and time for {service}." },
-    "confirm": { "title": "Booking Details – {service} | Mansoorah", "description": "Enter your address and payment method to confirm your booking." },
-    "success": { "title": "Booking Confirmed | Mansoorah", "description": "Your Mansoorah booking is confirmed." },
-    "bookings": { "title": "My Bookings | Mansoorah", "description": "View, reschedule, cancel and rate your Mansoorah bookings." },
-    "rate": { "title": "Rate Your Service | Mansoorah", "description": "Tell us how your Mansoorah visit went." },
-    "technicians": { "title": "Verified Omani Technicians | Mansoorah", "description": "Browse background-checked Omani technicians by service, region and rating." },
-    "technician": { "title": "{name} – Verified Technician | Mansoorah", "description": "{name}: verified Omani technician in {region}. Rated {rating}/5. Book online at fixed prices." },
-    "join": { "title": "Join as a Technician – Steady Jobs, Fair Pay | Mansoorah", "description": "Omani technicians: get steady smart-home jobs at fair fixed prices with weekly payouts. Free and Pro plans." },
-    "partners": { "title": "Partners – Retailers & Property Managers | Mansoorah", "description": "Refer buyers for installation or get bulk installations and maintenance plans for your properties." },
-    "howItWorks": { "title": "How It Works & Trust and Safety | Mansoorah", "description": "How booking works, how technicians are verified, our fixed-price promise, warranty and cancellation policy." },
-    "about": { "title": "About Mansoorah – A UTAS Student Venture", "description": "The story, mission and team behind Mansoorah, a trusted smart-home service platform for Oman." },
-    "faq": { "title": "Frequently Asked Questions | Mansoorah", "description": "Answers about booking, prices, payment, technician safety, warranty, cancellation and privacy." },
-    "contact": { "title": "Contact Us | Mansoorah", "description": "Reach Mansoorah on WhatsApp, phone or e-mail. Saturday to Thursday, 8:00–20:00." },
-    "login": { "title": "Log In | Mansoorah", "description": "Log in to manage your bookings." },
-    "signup": { "title": "Create an Account | Mansoorah", "description": "Join Mansoorah as a customer or technician." },
-    "forgot": { "title": "Reset Password | Mansoorah", "description": "Reset your Mansoorah password." },
-    "privacy": { "title": "Privacy Notice | Mansoorah", "description": "How Mansoorah handles personal data under Oman’s Personal Data Protection Law." },
-    "terms": { "title": "Terms of Use | Mansoorah", "description": "The terms for using the Mansoorah prototype and booking services." },
-    "cancellation": { "title": "Cancellation & Refund Policy | Mansoorah", "description": "Free cancellation up to 3 hours before the visit, and how refunds work." },
-    "credits": { "title": "Credits & Licences | Mansoorah", "description": "Fonts, icons, illustrations and open-source licences used on this site." },
-    "notFound": { "title": "Page Not Found | Mansoorah", "description": "The page you were looking for doesn’t exist." }
+    "home": {
+      "title": "Mansoorah – Trusted Smart-Home Technicians in Oman",
+      "description": "Book verified Omani technicians for smart locks, cameras, Wi-Fi and smart-home setup in Muscat, Al Batinah and Dhofar. Fixed prices in OMR, no hidden fees."
+    },
+    "services": {
+      "title": "Our Services – Smart Installations & Tech Maintenance | Mansoorah",
+      "description": "Smart door locks, security cameras, video doorbells, smart lighting, Wi-Fi and gadget repairs at fixed OMR prices by verified Omani technicians."
+    },
+    "service": {
+      "title": "{service} in Oman – {price} fixed price | Mansoorah",
+      "description": "{service} by a verified Omani technician. Fixed price {price}, no hidden fees, 7-day warranty. Book online in minutes."
+    },
+    "book": {
+      "title": "Choose Your Technician – {service} | Mansoorah",
+      "description": "Select a verified technician, date and time for {service}."
+    },
+    "confirm": {
+      "title": "Booking Details – {service} | Mansoorah",
+      "description": "Enter your address and payment method to confirm your booking."
+    },
+    "success": {
+      "title": "Booking Confirmed | Mansoorah",
+      "description": "Your Mansoorah booking is confirmed."
+    },
+    "bookings": {
+      "title": "My Bookings | Mansoorah",
+      "description": "View, reschedule, cancel and rate your Mansoorah bookings."
+    },
+    "rate": {
+      "title": "Rate Your Service | Mansoorah",
+      "description": "Tell us how your Mansoorah visit went."
+    },
+    "technicians": {
+      "title": "Verified Omani Technicians | Mansoorah",
+      "description": "Browse background-checked Omani technicians by service, region and rating."
+    },
+    "technician": {
+      "title": "{name} – Verified Technician | Mansoorah",
+      "description": "{name}: verified Omani technician in {region}. Rated {rating}/5. Book online at fixed prices."
+    },
+    "join": {
+      "title": "Join as a Technician – Steady Jobs, Fair Pay | Mansoorah",
+      "description": "Omani technicians: get steady smart-home jobs at fair fixed prices with weekly payouts. Free and Pro plans."
+    },
+    "partners": {
+      "title": "Partners – Retailers & Property Managers | Mansoorah",
+      "description": "Refer buyers for installation or get bulk installations and maintenance plans for your properties."
+    },
+    "howItWorks": {
+      "title": "How It Works & Trust and Safety | Mansoorah",
+      "description": "How booking works, how technicians are verified, our fixed-price promise, warranty and cancellation policy."
+    },
+    "about": {
+      "title": "About Mansoorah – A UTAS Student Venture",
+      "description": "The story, mission and team behind Mansoorah, a trusted smart-home service platform for Oman."
+    },
+    "faq": {
+      "title": "Frequently Asked Questions | Mansoorah",
+      "description": "Answers about booking, prices, payment, technician safety, warranty, cancellation and privacy."
+    },
+    "contact": {
+      "title": "Contact Us | Mansoorah",
+      "description": "Reach Mansoorah on WhatsApp, phone or e-mail. Saturday to Thursday, 8:00–20:00."
+    },
+    "login": {
+      "title": "Log In | Mansoorah",
+      "description": "Log in to manage your bookings."
+    },
+    "signup": {
+      "title": "Create an Account | Mansoorah",
+      "description": "Join Mansoorah as a customer or technician."
+    },
+    "forgot": {
+      "title": "Reset Password | Mansoorah",
+      "description": "Reset your Mansoorah password."
+    },
+    "privacy": {
+      "title": "Privacy Notice | Mansoorah",
+      "description": "How Mansoorah handles personal data under Oman’s Personal Data Protection Law."
+    },
+    "terms": {
+      "title": "Terms of Use | Mansoorah",
+      "description": "The terms for using the Mansoorah prototype and booking services."
+    },
+    "cancellation": {
+      "title": "Cancellation & Refund Policy | Mansoorah",
+      "description": "Free cancellation up to 3 hours before the visit, and how refunds work."
+    },
+    "credits": {
+      "title": "Credits & Licences | Mansoorah",
+      "description": "Fonts, icons, illustrations and open-source licences used on this site."
+    },
+    "notFound": {
+      "title": "Page Not Found | Mansoorah",
+      "description": "The page you were looking for doesn’t exist."
+    },
+    "admin": {
+      "title": "Admin | Mansoorah",
+      "description": "Mansoorah admin dashboard."
+    },
+    "reset": {
+      "title": "Set a New Password | Mansoorah",
+      "description": "Choose a new password for your Mansoorah account."
+    }
   },
   "nav": {
     "home": "Home",
@@ -49,7 +129,8 @@
     "switchLangLabel": "التبديل إلى العربية",
     "themeToDark": "Switch to dark theme",
     "themeToLight": "Switch to light theme",
-    "breadcrumb": "Breadcrumb"
+    "breadcrumb": "Breadcrumb",
+    "admin": "Admin"
   },
   "banner": {
     "text": "Prototype – demo bookings only. No real payments are taken.",
@@ -106,7 +187,10 @@
     "openInNew": "(opens in a new tab)",
     "installApp": "Install app",
     "installHint": "Add Mansoorah to your home screen for faster repeat bookings.",
-    "notNow": "Not now"
+    "notNow": "Not now",
+    "consentLive": "Your details are sent securely to Mansoorah and used only to handle your request. See our Privacy Notice.",
+    "sendError": "We couldn't send this right now. Please try again, or use WhatsApp.",
+    "refresh": "Refresh"
   },
   "categories": {
     "smart": "Smart Installations",
@@ -157,26 +241,55 @@
       "save": "Save {amount}",
       "instead": "instead of {price} booked separately",
       "cta": "Book the package",
-      "items": ["Smart door lock fitted & app paired", "Smart-home hub set up", "Up to 4 smart bulbs configured", "One visit, one fixed price"]
+      "items": [
+        "Smart door lock fitted & app paired",
+        "Smart-home hub set up",
+        "Up to 4 smart bulbs configured",
+        "One visit, one fixed price"
+      ]
     },
     "how": {
       "eyebrow": "How it works",
       "title": "Booked in minutes, done in one visit",
       "steps": [
-        { "title": "Browse & select", "text": "Pick the service you need from our fixed-price catalogue." },
-        { "title": "Choose your technician", "text": "Compare verified Omani technicians by profile, skills and rating." },
-        { "title": "Book at a fixed price", "text": "Choose a date and time. The OMR price is final – no hidden fees." },
-        { "title": "Home visit & rating", "text": "Your technician arrives, gets it done, and you rate the service." }
+        {
+          "title": "Browse & select",
+          "text": "Pick the service you need from our fixed-price catalogue."
+        },
+        {
+          "title": "Choose your technician",
+          "text": "Compare verified Omani technicians by profile, skills and rating."
+        },
+        {
+          "title": "Book at a fixed price",
+          "text": "Choose a date and time. The OMR price is final – no hidden fees."
+        },
+        {
+          "title": "Home visit & rating",
+          "text": "Your technician arrives, gets it done, and you rate the service."
+        }
       ]
     },
     "pillars": {
       "eyebrow": "Why Mansoorah",
       "title": "Built on trust, not guesswork",
       "items": [
-        { "title": "Verified Omani technicians", "text": "Strict ID, background and skill screening before anyone enters your home." },
-        { "title": "Transparent ratings", "text": "Reviews come from customers with a completed booking – nothing else counts." },
-        { "title": "Upfront fixed prices", "text": "One published price per service. No haggling, no surprise charges." },
-        { "title": "Lean & fast", "text": "Book from any browser in about two minutes. No app to download." }
+        {
+          "title": "Verified Omani technicians",
+          "text": "Strict ID, background and skill screening before anyone enters your home."
+        },
+        {
+          "title": "Transparent ratings",
+          "text": "Reviews come from customers with a completed booking – nothing else counts."
+        },
+        {
+          "title": "Upfront fixed prices",
+          "text": "One published price per service. No haggling, no surprise charges."
+        },
+        {
+          "title": "Lean & fast",
+          "text": "Book from any browser in about two minutes. No app to download."
+        }
       ]
     },
     "techs": {
@@ -256,7 +369,12 @@
     "deviceNote": "The device itself is supplied by you unless stated."
   },
   "book": {
-    "steps": ["Choose Service", "Select Technician", "Booking Details", "Confirm"],
+    "steps": [
+      "Choose Service",
+      "Select Technician",
+      "Booking Details",
+      "Confirm"
+    ],
     "stepsLabel": "Booking progress",
     "stepDone": "completed",
     "stepCurrent": "current step",
@@ -285,7 +403,11 @@
     "free": "Free",
     "total": "Total",
     "missing": "Choose a technician, date and time to continue.",
-    "trust": ["Verified Omani Technicians", "Real Customer Ratings", "Upfront & Fixed Pricing"],
+    "trust": [
+      "Verified Omani Technicians",
+      "Real Customer Ratings",
+      "Upfront & Fixed Pricing"
+    ],
     "reschedulingTitle": "Rescheduling booking {id}",
     "rescheduleSave": "Save new time",
     "rescheduled": "Your booking was moved to {date} at {time}.",
@@ -344,7 +466,10 @@
       "house": "Please enter the house or building number.",
       "terms": "Please accept the terms to continue.",
       "summary": "Please fix the highlighted fields."
-    }
+    },
+    "loginTitle": "Log in to confirm your booking",
+    "loginText": "Your booking is saved to your account, so you can see, reschedule or cancel it from any device.",
+    "saveError": "We couldn't save your booking. Please check your connection and try again."
   },
   "success": {
     "title": "Booking confirmed!",
@@ -369,8 +494,16 @@
   "bookings": {
     "title": "My Bookings",
     "sub": "Bookings are saved on this device only (prototype).",
-    "tabs": { "upcoming": "Upcoming", "completed": "Completed", "cancelled": "Cancelled" },
-    "status": { "upcoming": "Upcoming", "completed": "Completed", "cancelled": "Cancelled" },
+    "tabs": {
+      "upcoming": "Upcoming",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "status": {
+      "upcoming": "Upcoming",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
     "empty": {
       "upcoming": "No upcoming bookings yet.",
       "completed": "No completed bookings yet.",
@@ -392,20 +525,42 @@
     "completedToast": "Booking {id} marked as completed. You can rate it now.",
     "waMessage": "Hello Mansoorah, I need help with booking {id} ({service}).",
     "sampleNote": "Sample booking",
-    "total": "Total"
+    "total": "Total",
+    "subLive": "All bookings on your account, from any device.",
+    "loginTitle": "Log in to see your bookings",
+    "loginText": "Your bookings are saved to your account so you can access them from any device.",
+    "updateError": "We couldn't update this booking. Please try again."
   },
   "rate": {
     "title": "Rate Your Service",
     "sub": "Your feedback keeps our technicians accountable.",
     "progress": "Booking progress",
-    "steps": ["Select Service", "Choose Specialist", "Confirm Booking", "Service Completed", "Rate Service"],
+    "steps": [
+      "Select Service",
+      "Choose Specialist",
+      "Confirm Booking",
+      "Service Completed",
+      "Rate Service"
+    ],
     "completed": "Service Completed",
     "completedOn": "Completed on {date}",
     "starsLegend": "Your rating",
-    "starLabels": ["Poor", "Fair", "Good", "Very good", "Excellent"],
+    "starLabels": [
+      "Poor",
+      "Fair",
+      "Good",
+      "Very good",
+      "Excellent"
+    ],
     "star": "{n} stars",
     "tagsLegend": "What went well?",
-    "tags": ["On time", "Professional", "Clean work", "Explained everything", "Good value"],
+    "tags": [
+      "On time",
+      "Professional",
+      "Clean work",
+      "Explained everything",
+      "Good value"
+    ],
     "feedback": "Tell us more",
     "feedbackPh": "What did you like? What could be better?",
     "submit": "Submit Rating",
@@ -427,7 +582,12 @@
     "count": "{n} technicians",
     "empty": "No technicians match these filters.",
     "viewProfile": "View profile",
-    "checks": ["ID verified", "Skills test passed", "Background check", "Training completed"],
+    "checks": [
+      "ID verified",
+      "Skills test passed",
+      "Background check",
+      "Training completed"
+    ],
     "verification": "Verification",
     "regions": "Areas served",
     "skills": "Skills",
@@ -450,27 +610,67 @@
     "cta": "Apply now",
     "benefitsTitle": "Why technicians join",
     "benefits": [
-      { "title": "Steady jobs", "text": "Customers in your wilayat book you directly – no cold calls, no chasing." },
-      { "title": "Fair fixed pricing", "text": "Prices are published upfront. No haggling at the door." },
-      { "title": "Weekly payouts", "text": "Your earnings are transferred every week, with a clear statement." },
-      { "title": "Pro plan", "text": "Optional upgrade for a featured listing and priority in search." }
+      {
+        "title": "Steady jobs",
+        "text": "Customers in your wilayat book you directly – no cold calls, no chasing."
+      },
+      {
+        "title": "Fair fixed pricing",
+        "text": "Prices are published upfront. No haggling at the door."
+      },
+      {
+        "title": "Weekly payouts",
+        "text": "Your earnings are transferred every week, with a clear statement."
+      },
+      {
+        "title": "Pro plan",
+        "text": "Optional upgrade for a featured listing and priority in search."
+      }
     ],
     "reqTitle": "Requirements",
-    "requirements": ["Omani national", "Valid Omani ID", "Relevant certificate or proven experience", "Your own basic tools", "A smartphone with WhatsApp"],
+    "requirements": [
+      "Omani national",
+      "Valid Omani ID",
+      "Relevant certificate or proven experience",
+      "Your own basic tools",
+      "A smartphone with WhatsApp"
+    ],
     "processTitle": "Verification process",
     "process": [
-      { "title": "Apply", "text": "Fill in the short form below." },
-      { "title": "ID & background check", "text": "We verify your ID and background." },
-      { "title": "Skills test", "text": "A practical test on the services you offer." },
-      { "title": "Short training", "text": "Conduct in homes, the app, and our quality standards." },
-      { "title": "Go live", "text": "Your verified profile starts receiving bookings." }
+      {
+        "title": "Apply",
+        "text": "Fill in the short form below."
+      },
+      {
+        "title": "ID & background check",
+        "text": "We verify your ID and background."
+      },
+      {
+        "title": "Skills test",
+        "text": "A practical test on the services you offer."
+      },
+      {
+        "title": "Short training",
+        "text": "Conduct in homes, the app, and our quality standards."
+      },
+      {
+        "title": "Go live",
+        "text": "Your verified profile starts receiving bookings."
+      }
     ],
     "plansTitle": "Free vs Pro",
     "free": "Free",
     "freePrice": "0 OMR",
     "proName": "Pro",
     "perMonth": "per month",
-    "planFeatures": ["Verified profile", "Receive bookings", "Weekly payouts", "Featured listing", "Priority in search", "Pro profile badge"],
+    "planFeatures": [
+      "Verified profile",
+      "Receive bookings",
+      "Weekly payouts",
+      "Featured listing",
+      "Priority in search",
+      "Pro profile badge"
+    ],
     "included": "Included",
     "notIncluded": "Not included",
     "earningsTitle": "How earnings work",
@@ -503,13 +703,21 @@
     "sub": "Two ways to grow with us: refer your customers for installation, or let us look after your properties.",
     "retailTitle": "Smart-device retailers",
     "retailText": "Your customers buy smart devices – we make sure they get installed properly. Refer buyers and earn a referral commission on every completed installation.",
-    "retailPoints": ["Fewer returns from “it didn’t work” installs", "Referral commission on completed jobs", "Simple QR card at the checkout"],
+    "retailPoints": [
+      "Fewer returns from “it didn’t work” installs",
+      "Referral commission on completed jobs",
+      "Simple QR card at the checkout"
+    ],
     "qrTitle": "Install with Mansoorah",
     "qrText": "Scan to book a verified technician",
     "qrNote": "Concept card – the QR opens the services page.",
     "landlordTitle": "Landlords & property managers",
     "landlordText": "Smart locks for every unit, cameras for common areas, and fast repairs for tenants – handled by one trusted team.",
-    "landlordPoints": ["Bulk installations across buildings", "Maintenance plans with priority visits", "One monthly invoice for all units"],
+    "landlordPoints": [
+      "Bulk installations across buildings",
+      "Maintenance plans with priority visits",
+      "One monthly invoice for all units"
+    ],
     "placeholderTitle": "Your store here",
     "placeholderText": "Become a partner",
     "formRetail": "Retail partner request",
@@ -535,25 +743,64 @@
     "sub": "Everything that happens before, during and after a Mansoorah visit – and how we keep your home safe.",
     "customersTitle": "For customers",
     "customers": [
-      { "title": "Browse & select a service", "text": "Every service has a clear description, what’s included, what’s not, and one fixed OMR price." },
-      { "title": "Choose a verified technician", "text": "Compare profiles, skills, regions and ratings. The price is the same whoever you pick." },
-      { "title": "Book online at a fixed price", "text": "Pick a date in the next 14 days and a time slot, add your address and choose how to pay." },
-      { "title": "Fast home visit, then rate", "text": "The technician confirms on WhatsApp, completes the job, walks you through it, and you rate the service." }
+      {
+        "title": "Browse & select a service",
+        "text": "Every service has a clear description, what’s included, what’s not, and one fixed OMR price."
+      },
+      {
+        "title": "Choose a verified technician",
+        "text": "Compare profiles, skills, regions and ratings. The price is the same whoever you pick."
+      },
+      {
+        "title": "Book online at a fixed price",
+        "text": "Pick a date in the next 14 days and a time slot, add your address and choose how to pay."
+      },
+      {
+        "title": "Fast home visit, then rate",
+        "text": "The technician confirms on WhatsApp, completes the job, walks you through it, and you rate the service."
+      }
     ],
     "techsTitle": "For technicians",
     "techs": [
-      { "title": "Apply and get verified", "text": "ID, background and skills checks, plus a short training." },
-      { "title": "Receive bookings", "text": "Customers in your areas book you at published prices." },
-      { "title": "Do great work", "text": "Arrive on time, follow the checklist, explain everything." },
-      { "title": "Get paid weekly", "text": "Earnings minus the 15%–20% commission are paid out each week." }
+      {
+        "title": "Apply and get verified",
+        "text": "ID, background and skills checks, plus a short training."
+      },
+      {
+        "title": "Receive bookings",
+        "text": "Customers in your areas book you at published prices."
+      },
+      {
+        "title": "Do great work",
+        "text": "Arrive on time, follow the checklist, explain everything."
+      },
+      {
+        "title": "Get paid weekly",
+        "text": "Earnings minus the 15%–20% commission are paid out each week."
+      }
     ],
     "verifyTitle": "How we verify technicians",
     "verify": [
-      { "title": "ID verification", "text": "Omani nationality and a valid ID are confirmed." },
-      { "title": "Background check", "text": "Checked before the technician can enter any home." },
-      { "title": "Skills test", "text": "A practical test for every service they offer." },
-      { "title": "Training", "text": "Conduct in homes, privacy, safety and our quality checklist." },
-      { "title": "Ongoing ratings", "text": "Low ratings trigger a review; repeated issues mean removal." }
+      {
+        "title": "ID verification",
+        "text": "Omani nationality and a valid ID are confirmed."
+      },
+      {
+        "title": "Background check",
+        "text": "Checked before the technician can enter any home."
+      },
+      {
+        "title": "Skills test",
+        "text": "A practical test for every service they offer."
+      },
+      {
+        "title": "Training",
+        "text": "Conduct in homes, privacy, safety and our quality checklist."
+      },
+      {
+        "title": "Ongoing ratings",
+        "text": "Low ratings trigger a review; repeated issues mean removal."
+      }
     ],
     "guaranteeTitle": "Satisfaction guarantee",
     "guaranteeText": "If something isn’t right, tell us. Our team follows up, and the technician returns to fix the work within the 7-day warranty – at no extra cost.",
@@ -583,10 +830,22 @@
     "utasText": "Mansoorah started as a course project at the University of Technology and Applied Sciences. This website is a working prototype; the business is not yet registered.",
     "roadmapTitle": "Roadmap",
     "roadmap": [
-      { "title": "MVP web platform", "text": "Fixed-price booking in four governorates." },
-      { "title": "Technician app", "text": "Job management, navigation and payouts for technicians." },
-      { "title": "Maintenance plans", "text": "Yearly smart-home check-ups for families and landlords." },
-      { "title": "More governorates", "text": "Expanding to Ad Dakhiliyah, Ash Sharqiyah and beyond." }
+      {
+        "title": "MVP web platform",
+        "text": "Fixed-price booking in four governorates."
+      },
+      {
+        "title": "Technician app",
+        "text": "Job management, navigation and payouts for technicians."
+      },
+      {
+        "title": "Maintenance plans",
+        "text": "Yearly smart-home check-ups for families and landlords."
+      },
+      {
+        "title": "More governorates",
+        "text": "Expanding to Ad Dakhiliyah, Ash Sharqiyah and beyond."
+      }
     ],
     "now": "Now",
     "next": "Next"
@@ -618,7 +877,13 @@
     "phoneField": "Mobile number",
     "emailField": "E-mail (optional)",
     "topic": "Topic",
-    "topics": ["A booking", "A service question", "Technician applications", "Partnerships", "Something else"],
+    "topics": [
+      "A booking",
+      "A service question",
+      "Technician applications",
+      "Partnerships",
+      "Something else"
+    ],
     "message": "Message",
     "submit": "Prepare message",
     "doneTitle": "Message ready",
@@ -633,7 +898,11 @@
     "joinText": "Create an account to book faster and keep all your home services in one place.",
     "forgotTitle": "Forgot your password?",
     "forgotText": "No problem. Enter your e-mail and we’ll send you a reset link.",
-    "slides": ["Verified Omani technicians", "Upfront fixed prices", "Fast home visits"],
+    "slides": [
+      "Verified Omani technicians",
+      "Upfront fixed prices",
+      "Fast home visits"
+    ],
     "slideLabel": "Slide {n}",
     "loginTitle": "Log in",
     "signupTitle": "Create your account",
@@ -669,7 +938,25 @@
     "errPassword": "Password must be at least 8 characters.",
     "errMatch": "Passwords don’t match.",
     "errName": "Please enter your full name.",
-    "loggedOut": "You’ve been logged out."
+    "loggedOut": "You’ve been logged out.",
+    "checkEmail": "Account created! We sent a confirmation link to {email}. Open it, then log in.",
+    "errInvalid": "Wrong e-mail or password.",
+    "errExists": "An account with this e-mail already exists. Log in instead.",
+    "errNotConfirmed": "Please confirm your e-mail first – check your inbox.",
+    "errWeak": "Please choose a stronger password (at least 8 characters).",
+    "errGeneric": "Something went wrong. Please try again.",
+    "resetSentLive": "If an account exists for {email}, we've sent a password reset link to it.",
+    "newPasswordTitle": "Set a new password",
+    "newPasswordText": "Choose a new password for your Mansoorah account.",
+    "saveNewPassword": "Save new password",
+    "passwordUpdated": "Your password has been updated.",
+    "resetInvalid": "This reset link is invalid or has expired. Please request a new one.",
+    "consent": "I agree to the {privacy}.",
+    "privacyLink": "Privacy Notice",
+    "errConsent": "Please accept the Privacy Notice to create an account.",
+    "liveNote": "Your account is stored securely. Passwords are encrypted by our authentication provider and are never visible to Mansoorah.",
+    "welcomeBackName": "Welcome back, {name}!",
+    "signedUpLive": "Welcome to Mansoorah, {name}!"
   },
   "legal": {
     "privacyTitle": "Privacy Notice",
@@ -699,5 +986,50 @@
   },
   "toast": {
     "region": "Notifications"
+  },
+  "admin": {
+    "title": "Admin dashboard",
+    "sub": "All bookings, customers and requests in one place.",
+    "notAllowed": "This page is for the Mansoorah admin only.",
+    "demo": "The admin dashboard needs the online database. It will work once the site is connected to Supabase.",
+    "loadError": "Couldn't load data. Check your connection and try again.",
+    "statBookings": "Total bookings",
+    "statUpcoming": "Upcoming",
+    "statRevenue": "Completed value",
+    "statCustomers": "Accounts",
+    "statRequests": "New requests",
+    "tabBookings": "Bookings",
+    "tabAccounts": "Accounts",
+    "tabRequests": "Requests",
+    "search": "Search by name, phone or booking ID",
+    "colBooking": "Booking",
+    "colCustomer": "Customer",
+    "colWhen": "Appointment",
+    "colStatus": "Status",
+    "colActions": "Actions",
+    "colName": "Name",
+    "colEmail": "E-mail",
+    "colPhone": "Phone",
+    "colRole": "Role",
+    "colJoined": "Joined",
+    "colType": "Type",
+    "colDetails": "Details",
+    "colDate": "Received",
+    "markCompleted": "Mark completed",
+    "markCancelled": "Cancel",
+    "markUpcoming": "Reopen",
+    "markDone": "Mark handled",
+    "statusNew": "New",
+    "statusDone": "Handled",
+    "empty": "Nothing here yet.",
+    "updated": "Saved.",
+    "rated": "Rated {n}/5",
+    "roleCustomer": "Customer",
+    "roleTechnician": "Technician",
+    "roleAdmin": "Admin",
+    "kindTechnician": "Technician application",
+    "kindRetail": "Retail partner",
+    "kindLandlord": "Property partner",
+    "kindContact": "Contact message"
   }
 }

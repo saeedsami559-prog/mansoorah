@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -26,6 +26,7 @@ import { Avatar } from '../components/technician/Avatar';
 import { ServiceArt } from '../components/service/ServiceArt';
 import { useBooking } from '../components/booking/BookingContext';
 import { useToast } from '../components/ui/Toast';
+import { useAuth } from '../components/auth/AuthContext';
 import { PriceLines, TrustStrip } from './BookTechnician';
 import { getBookable } from '../data/services';
 import { getTechnician } from '../data/technicians';
@@ -68,6 +69,7 @@ export default function BookConfirm() {
   const toast = useToast();
   const { t, tl, loc, lang } = useI18n();
   const { draft, setDraft, addBooking, bookings } = useBooking();
+  const { live, user, loading } = useAuth();
   const item = getBookable(slug);
   const valid = draft && draft.slug === slug && draft.techId && draft.date && draft.slot;
   const tech = getTechnician(draft?.techId);
@@ -94,6 +96,12 @@ export default function BookConfirm() {
       wilayat: '',
     } as Partial<FormValues>,
   });
+  // Pre-fill contact details from the signed-in account.
+  useEffect(() => {
+    if (!user) return;
+    if (user.name) setValue('name', user.name);
+    if (user.phone) setValue('phone', user.phone);
+  }, [user, setValue]);
   const governorate = watch('governorate');
   const payment = watch('payment');
   const wilayats = useMemo(() => getRegion(governorate)?.wilayats ?? [], [governorate]);
@@ -107,6 +115,7 @@ export default function BookConfirm() {
       <div className="container-x py-16">
         <EmptyState
           icon={<CalendarClock className="size-7" />}
+          level={1}
           title={t('confirm.missingDraft')}
           action={<ButtonLink to={`/book/${item.slug}`}>{t('confirm.restart')}</ButtonLink>}
         />
@@ -114,20 +123,38 @@ export default function BookConfirm() {
     );
   }
 
-  const onSubmit = (v: FormValues) => {
+  if (live && !loading && !user) {
+    const next = encodeURIComponent(`/book/${item.slug}/confirm`);
+    return (
+      <div className="container-x py-16">
+        <Seo title={t('meta.confirm.title', { service: title })} description={t('meta.confirm.description')} noindex />
+        <EmptyState
+          icon={<User className="size-7" />}
+          level={1}
+          title={t('confirm.loginTitle')}
+          text={t('confirm.loginText')}
+          action={
+            <div className="flex flex-wrap justify-center gap-2">
+              <ButtonLink to={`/login?next=${next}`}>{t('nav.login')}</ButtonLink>
+              <ButtonLink to={`/signup?next=${next}`} variant="secondary">
+                {t('auth.signupLink')}
+              </ButtonLink>
+            </div>
+          }
+        />
+      </div>
+    );
+  }
+
+  const onSubmit = async (v: FormValues) => {
     if (!isSlotBookable(tech.id, draft.date!, draft.slot!)) {
       toast(t('book.slotTaken'), 'info');
       navigate(`/book/${item.slug}`);
       return;
     }
     const now = new Date();
-    const id = newBookingId(
-      now,
-      Math.random,
-      bookings.map((b) => b.id),
-    );
-    const booking: Booking = {
-      id,
+    const taken = bookings.map((b) => b.id);
+    const base: Omit<Booking, 'id'> = {
       slug: item.slug,
       techId: tech.id,
       date: draft.date!,
@@ -149,10 +176,18 @@ export default function BookConfirm() {
       },
       createdAt: toISODate(now),
     };
-    addBooking(booking);
-    setDraft(null);
-    track('booking_confirmed', { slug: item.slug, payment: v.payment, total: booking.total });
-    navigate(`/booking/${id}/success`);
+    // Retry with a fresh ID in the rare case it is already used by another customer.
+    for (let attempt = 0; attempt < 4; attempt++) {
+      const id = newBookingId(now, Math.random, taken);
+      taken.push(id);
+      if (await addBooking({ ...base, id })) {
+        setDraft(null);
+        track('booking_confirmed', { slug: item.slug, payment: v.payment, total: base.total });
+        navigate(`/booking/${id}/success`);
+        return;
+      }
+    }
+    toast(t('confirm.saveError'), 'info');
   };
 
   const errorCount = Object.keys(errors).length;
@@ -366,7 +401,7 @@ export default function BookConfirm() {
               </p>
             )}
           </fieldset>
-          <p className="text-sm text-muted">{t('common.consent')}</p>
+          <p className="text-sm text-muted">{live ? t('common.consentLive') : t('common.consent')}</p>
         </div>
 
         <aside aria-labelledby="sum-h" className="min-w-0 lg:sticky lg:top-24 lg:self-start">

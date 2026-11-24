@@ -1,15 +1,17 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { LogIn, Mail } from 'lucide-react';
+import { AlertCircle, LogIn, Mail } from 'lucide-react';
 import { useI18n, type TKey } from '../../i18n';
 import { Seo } from '../../components/layout/Seo';
 import { Field, describedBy } from '../../components/ui/Field';
 import { useToast } from '../../components/ui/Toast';
-import { AuthLayout, Divider, GoogleButton } from './AuthLayout';
+import { AuthLayout } from './AuthLayout';
+import { useAuth } from '../../components/auth/AuthContext';
+import { AUTH_ERROR_KEY, safeNext } from './shared';
 import { PasswordInput } from './PasswordInput';
-import { saveUser, sha256 } from '../../lib/auth';
 import { track } from '../../lib/track';
 
 const schema = z.object({
@@ -23,6 +25,10 @@ export default function Login() {
   const { t } = useI18n();
   const navigate = useNavigate();
   const toast = useToast();
+  const { signIn, live } = useAuth();
+  const [params] = useSearchParams();
+  const next = safeNext(params.get('next'), '/bookings');
+  const [formError, setFormError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -31,15 +37,15 @@ export default function Login() {
   const err = (k?: string) => (k ? t(k as TKey) : undefined);
 
   const onSubmit = async (v: Values) => {
-    const name = v.email
-      .split('@')[0]
-      .replace(/[._-]+/g, ' ')
-      .replace(/\b\w/g, (c) => c.toUpperCase());
-    // Only a hash of the e-mail is kept as a demo flag. The password is discarded.
-    saveUser({ name, role: 'customer', emailHash: await sha256(v.email) });
-    track('login_demo');
-    toast(t('auth.loggedIn', { name }));
-    navigate('/bookings');
+    setFormError(null);
+    const res = await signIn(v.email, v.password);
+    if (!res.ok) {
+      setFormError(t(AUTH_ERROR_KEY[res.error]));
+      return;
+    }
+    track('login', { live });
+    toast(t('auth.welcomeBackName', { name: v.email.split('@')[0] }));
+    navigate(next);
   };
 
   return (
@@ -48,6 +54,17 @@ export default function Login() {
       <AuthLayout title={t('auth.welcomeBack')} text={t('auth.welcomeText')} crumb={t('auth.loginTitle')}>
         <h1 className="text-[1.75rem] font-extrabold">{t('auth.loginTitle')}</h1>
         <p className="mt-1 text-muted">{t('auth.welcomeText')}</p>
+        <div aria-live="assertive">
+          {formError && (
+            <p
+              role="alert"
+              className="mt-5 flex items-center gap-2 rounded-xl border border-danger/40 bg-danger-bg p-3 text-sm font-semibold text-danger"
+            >
+              <AlertCircle className="size-5 shrink-0" aria-hidden="true" />
+              {formError}
+            </p>
+          )}
+        </div>
         <form className="mt-6 space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
           <Field id="l-email" label={t('auth.email')} error={err(errors.email?.message)}>
             <div className="relative">
@@ -92,15 +109,13 @@ export default function Login() {
             {t('auth.submitLogin')}
           </button>
         </form>
-        <Divider />
-        <GoogleButton />
         <p className="mt-6 text-center text-sm">
           {t('auth.noAccount')}{' '}
-          <Link to="/signup" className="font-semibold">
+          <Link to={`/signup${params.get('next') ? `?next=${encodeURIComponent(next)}` : ''}`} className="font-semibold">
             {t('auth.signupLink')}
           </Link>
         </p>
-        <p className="mt-4 rounded-xl bg-surface-2 p-3 text-xs text-muted">{t('auth.demoNote')}</p>
+        <p className="mt-4 rounded-xl bg-surface-2 p-3 text-xs text-muted">{live ? t('auth.liveNote') : t('auth.demoNote')}</p>
       </AuthLayout>
     </>
   );

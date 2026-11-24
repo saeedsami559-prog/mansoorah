@@ -15,6 +15,7 @@ import { I18nProvider, detectLang, loadLang } from './i18n';
 import { ThemeProvider } from './components/layout/theme';
 import { ToastProvider } from './components/ui/Toast';
 import { BookingProvider } from './components/booking/BookingContext';
+import { AuthProvider } from './components/auth/AuthContext';
 
 // GitHub Pages SPA fallback: 404.html stores the requested path, we restore it before routing.
 try {
@@ -35,9 +36,11 @@ loadLang(initialLang).finally(() =>
         <ThemeProvider>
           <I18nProvider initial={initialLang}>
             <ToastProvider>
-              <BookingProvider>
-                <App />
-              </BookingProvider>
+              <AuthProvider>
+                <BookingProvider>
+                  <App />
+                </BookingProvider>
+              </AuthProvider>
             </ToastProvider>
           </I18nProvider>
         </ThemeProvider>

@@ -29,6 +29,9 @@ import { SERVICES, getService } from '../data/services';
 import { REGIONS, getRegion } from '../data/regions';
 import { isValidOmaniMobile } from '../lib/phone';
 import { writeJSON } from '../lib/storage';
+import { submitRequest } from '../lib/requests';
+import { useAuth } from '../components/auth/AuthContext';
+import { useToast } from '../components/ui/Toast';
 import { RULES } from '../config/site';
 import { formatOmaniPhone } from '../lib/format';
 import { track } from '../lib/track';
@@ -54,6 +57,8 @@ const PROCESS_ICONS = [Send, IdCard, ClipboardCheck, GraduationCap, Rocket];
 
 export default function Join() {
   const { t, tl, ta, loc, omr } = useI18n();
+  const { user, live } = useAuth();
+  const toast = useToast();
   const [message, setMessage] = useState<string | null>(null);
   const {
     register,
@@ -70,7 +75,7 @@ export default function Join() {
   const pct = RULES.commissionMax;
   const commission = (example * pct) / 100;
 
-  const onSubmit = (v: Values) => {
+  const onSubmit = async (v: Values) => {
     const msg = t('join.waMessage', {
       name: v.name,
       phone: formatOmaniPhone(v.phone),
@@ -80,6 +85,10 @@ export default function Join() {
       cert: v.cert || '-',
     });
     writeJSON('application', { ...v, at: new Date().toISOString() });
+    if (!(await submitRequest('technician', { ...v }, user?.id))) {
+      toast(t('common.sendError'), 'info');
+      return;
+    }
     track('technician_application', { region: v.region, skills: v.skills.length });
     setMessage(msg);
   };
@@ -350,7 +359,7 @@ export default function Join() {
                   )}
                 </div>
               </div>
-              <p className="text-sm text-muted sm:col-span-2">{t('common.consent')}</p>
+              <p className="text-sm text-muted sm:col-span-2">{live ? t('common.consentLive') : t('common.consent')}</p>
               <button type="submit" className="btn btn-primary btn-lg sm:col-span-2 sm:w-fit">
                 <Send className="flip-rtl size-5" aria-hidden="true" />
                 {t('join.submit')}

@@ -27,6 +27,11 @@ All 144 screenshots (24 pages × 390/768/1440 px × EN/AR) are in [`docs/screens
 - **Bilingual EN / AR** with full RTL, persisted language choice (first visit follows the browser), Western digits for prices, natural customer-facing Arabic.
 - **Light & dark themes**, demo banner, demo auth (no passwords stored), referral “Invite a neighbour” card, PWA (installable, offline shell), `track()` measurement hook (console only).
 
+## Accounts & admin
+Real accounts, bookings saved per account (log in from any device) and an admin dashboard at `/admin` run on **Supabase** (free plan).
+Setup takes ~5 minutes: see [docs/SUPABASE_SETUP.md](docs/SUPABASE_SETUP.md). Until it is connected the site runs in demo mode.
+The admin is whoever signs up with the team e-mail; the password is chosen at sign-up and is never in the code.
+
 ## Tech stack
 Vite 5 · React 18 · TypeScript (strict) · React Router 6 · Tailwind CSS v4 (CSS-variable design tokens) · lucide-react · framer-motion (success animation only) · react-hook-form + zod · @fontsource (self-hosted Plus Jakarta Sans, Inter, IBM Plex Sans Arabic) · vite-plugin-pwa · Vitest · Playwright · ESLint + Prettier · GitHub Actions → GitHub Pages.
 
@@ -46,7 +51,7 @@ node scripts/screenshots.mjs        # visual QA screenshots → docs/screenshots
 |---|---|
 | Typecheck, ESLint, Prettier | 0 errors |
 | Unit tests (Vitest) | 35 passed – price formatting, booking total (no VAT), Omani phone validation, slot availability, i18n key parity, catalogue prices |
-| E2E (Playwright, 390 px) | 7 passed – full booking → success → My Bookings → Rate in **EN and AR**, keyboard-only booking, login & signup validation, language toggle, full link crawl (no broken links, no page errors, consistent prices) |
+| E2E (Playwright, 390 px) | 7 demo-mode tests + 2 live-mode tests (accounts, login-gated booking, re-login keeps bookings, admin dashboard, rating, contact requests) passed – full booking → success → My Bookings → Rate in **EN and AR**, keyboard-only booking, login & signup validation, language toggle, full link crawl (no broken links, no page errors, consistent prices) |
 | Lighthouse mobile | Home 90/100/100/100 · Services 92/100/100/100 · Service details 92/100/100/100 · Booking 91/100/100/100 (Perf/A11y/BP/SEO) |
 | First-load JS | ≈ 112 KB gzip (budget 250 KB) |
 

@@ -122,7 +122,20 @@ export function Skeleton({ className = '' }: { className?: string }) {
   return <div className={`animate-pulse rounded-xl bg-surface-2 ${className}`} aria-hidden="true" />;
 }
 
-export function EmptyState({ icon, title, text, action }: { icon: ReactNode; title: string; text?: string; action?: ReactNode }) {
+export function EmptyState({
+  icon,
+  title,
+  text,
+  action,
+  level = 2,
+}: {
+  icon: ReactNode;
+  title: string;
+  text?: string;
+  action?: ReactNode;
+  level?: 1 | 2 | 3;
+}) {
+  const H = `h${level}` as 'h1' | 'h2' | 'h3';
   return (
     <div className="card flex flex-col items-center gap-3 px-6 py-12 text-center">
       <div
@@ -131,7 +144,7 @@ export function EmptyState({ icon, title, text, action }: { icon: ReactNode; tit
       >
         {icon}
       </div>
-      <p className="font-heading text-lg font-bold text-heading">{title}</p>
+      <H className="font-heading text-lg font-bold text-heading">{title}</H>
       {text && <p className="max-w-md text-muted">{text}</p>}
       {action}
     </div>

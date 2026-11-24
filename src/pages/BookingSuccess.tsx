@@ -9,6 +9,7 @@ import { Stepper } from '../components/ui/Stepper';
 import { Button, ButtonLink, EmptyState, ExternalButton } from '../components/ui/primitives';
 import { Avatar } from '../components/technician/Avatar';
 import { useBooking } from '../components/booking/BookingContext';
+import { useAuth } from '../components/auth/AuthContext';
 import { useToast } from '../components/ui/Toast';
 import { getBookable } from '../data/services';
 import { getTechnician } from '../data/technicians';
@@ -53,17 +54,26 @@ export function AnimatedCheck() {
 export default function BookingSuccess() {
   const { id } = useParams();
   const { t, loc, lang, omr } = useI18n();
-  const { getBooking } = useBooking();
+  const { getBooking, syncing } = useBooking();
+  const { live, loading } = useAuth();
   const toast = useToast();
   const booking = getBooking(id);
   const [copied, setCopied] = useState(false);
 
+  if (!booking && live && (loading || syncing)) {
+    return (
+      <p className="container-x py-24 text-center text-muted" role="status">
+        {t('common.loading')}
+      </p>
+    );
+  }
   if (!booking) {
     return (
       <div className="container-x py-16">
         <Seo title={t('meta.success.title')} description={t('meta.success.description')} noindex />
         <EmptyState
           icon={<ListChecks className="size-7" />}
+          level={1}
           title={t('success.notFound')}
           action={<ButtonLink to="/bookings">{t('success.viewBookings')}</ButtonLink>}
         />

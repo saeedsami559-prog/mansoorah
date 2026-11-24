@@ -8,6 +8,7 @@ import { useI18n, type TKey } from '../../i18n';
 import { Seo } from '../../components/layout/Seo';
 import { Field, describedBy } from '../../components/ui/Field';
 import { AuthLayout } from './AuthLayout';
+import { useAuth } from '../../components/auth/AuthContext';
 
 const schema = z.object({ email: z.string().trim().email('auth.errEmail') });
 type Values = z.infer<typeof schema>;
@@ -15,6 +16,7 @@ type Values = z.infer<typeof schema>;
 export default function ForgotPassword() {
   const { t } = useI18n();
   const [sent, setSent] = useState<string | null>(null);
+  const { resetPassword, live } = useAuth();
   const {
     register,
     handleSubmit,
@@ -31,11 +33,18 @@ export default function ForgotPassword() {
           {sent && (
             <p className="mt-6 flex items-start gap-2 rounded-xl bg-success-bg p-4 text-sm font-medium text-success-ink">
               <CheckCircle2 className="mt-0.5 size-5 shrink-0" aria-hidden="true" />
-              {t('auth.resetSent', { email: sent })}
+              {t(live ? 'auth.resetSentLive' : 'auth.resetSent', { email: sent })}
             </p>
           )}
         </div>
-        <form className="mt-6 space-y-4" onSubmit={handleSubmit((v) => setSent(v.email))} noValidate>
+        <form
+          className="mt-6 space-y-4"
+          onSubmit={handleSubmit(async (v) => {
+            await resetPassword(v.email);
+            setSent(v.email);
+          })}
+          noValidate
+        >
           <Field id="f-email" label={t('auth.email')} error={err(errors.email?.message)}>
             <div className="relative">
               <Mail

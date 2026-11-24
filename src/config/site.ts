@@ -39,3 +39,13 @@ export const RULES = {
 } as const;
 
 export const STORAGE_PREFIX = 'mansoorah.v1';
+
+/**
+ * Supabase project (accounts, bookings, admin). Both values are PUBLIC by design: the anon key only
+ * allows what the row-level-security rules in supabase/schema.sql permit. Never put the service_role key here.
+ * Leave empty to run the site in demo mode (everything stored in the visitor's browser).
+ */
+export const SUPABASE_URL: string = import.meta.env.VITE_SUPABASE_URL ?? '';
+export const SUPABASE_ANON_KEY: string = import.meta.env.VITE_SUPABASE_ANON_KEY ?? '';
+/** True when real accounts are available. `VITE_BACKEND=off` forces demo mode (used by local tests). */
+export const BACKEND_ENABLED = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY) && import.meta.env.VITE_BACKEND !== 'off';

@@ -13,6 +13,9 @@ import { Mark } from '../components/ui/Logo';
 import { REGIONS, getRegion } from '../data/regions';
 import { isValidOmaniMobile } from '../lib/phone';
 import { writeJSON } from '../lib/storage';
+import { submitRequest } from '../lib/requests';
+import { useAuth } from '../components/auth/AuthContext';
+import { useToast } from '../components/ui/Toast';
 import { formatOmaniPhone } from '../lib/format';
 import { SITE_URL } from '../config/site';
 import { track } from '../lib/track';
@@ -30,6 +33,8 @@ type Values = z.infer<typeof schema>;
 
 function PartnerForm({ kind }: { kind: 'retail' | 'landlord' }) {
   const { t, loc } = useI18n();
+  const { user, live } = useAuth();
+  const toast = useToast();
   const [message, setMessage] = useState<string | null>(null);
   const p = kind === 'retail' ? 'pr' : 'pl';
   const {
@@ -41,7 +46,7 @@ function PartnerForm({ kind }: { kind: 'retail' | 'landlord' }) {
     defaultValues: { company: '', name: '', phone: '', email: '', region: '', count: '', message: '' },
   });
   const err = (k?: string) => (k ? t(k as TKey) : undefined);
-  const onSubmit = (v: Values) => {
+  const onSubmit = async (v: Values) => {
     const msg = t(kind === 'retail' ? 'partners.waRetail' : 'partners.waLandlord', {
       company: v.company,
       name: v.name,
@@ -51,6 +56,10 @@ function PartnerForm({ kind }: { kind: 'retail' | 'landlord' }) {
       message: v.message || '-',
     });
     writeJSON(`partner-${kind}`, { ...v, at: new Date().toISOString() });
+    if (!(await submitRequest(kind === 'retail' ? 'partner-retail' : 'partner-landlord', { ...v }, user?.id))) {
+      toast(t('common.sendError'), 'info');
+      return;
+    }
     track('partner_request', { kind });
     setMessage(msg);
   };
@@ -155,7 +164,7 @@ function PartnerForm({ kind }: { kind: 'retail' | 'landlord' }) {
       >
         <textarea id={`${p}-message`} className="input" {...register('message')} />
       </Field>
-      <p className="text-sm text-muted sm:col-span-2">{t('common.consent')}</p>
+      <p className="text-sm text-muted sm:col-span-2">{live ? t('common.consentLive') : t('common.consent')}</p>
       <button type="submit" className="btn btn-primary sm:col-span-2 sm:w-fit">
         <Send className="flip-rtl size-4" aria-hidden="true" />
         {t('partners.submit')}

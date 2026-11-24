@@ -9,6 +9,7 @@ import { Badge, Button, ButtonLink, EmptyState, ExternalButton } from '../compon
 import { Avatar } from '../components/technician/Avatar';
 import { ServiceArt } from '../components/service/ServiceArt';
 import { useBooking } from '../components/booking/BookingContext';
+import { useAuth } from '../components/auth/AuthContext';
 import { useToast } from '../components/ui/Toast';
 import { byStatus, type Booking, type BookingStatus } from '../lib/bookings';
 import { getBookable } from '../data/services';
@@ -30,7 +31,7 @@ function BookingCard({
 }: {
   b: Booking;
   onCancel: (b: Booking) => void;
-  onComplete: (b: Booking) => void;
+  onComplete?: (b: Booking) => void;
 }) {
   const { t, loc, lang, omr } = useI18n();
   const item = getBookable(b.slug);
@@ -85,10 +86,12 @@ function BookingCard({
                 <CalendarX2 className="size-4" aria-hidden="true" />
                 {t('bookings.cancel')}
               </Button>
-              <Button variant="ghost" size="sm" onClick={() => onComplete(b)}>
-                <CheckCircle2 className="size-4" aria-hidden="true" />
-                {t('bookings.simulate')}
-              </Button>
+              {onComplete && (
+                <Button variant="ghost" size="sm" onClick={() => onComplete(b)}>
+                  <CheckCircle2 className="size-4" aria-hidden="true" />
+                  {t('bookings.simulate')}
+                </Button>
+              )}
             </>
           )}
           {b.status === 'completed' && !b.rating && (
@@ -113,7 +116,8 @@ function BookingCard({
 
 export default function MyBookings() {
   const { t } = useI18n();
-  const { bookings, updateBooking } = useBooking();
+  const { bookings, updateBooking, syncing } = useBooking();
+  const { live, user, loading } = useAuth();
   const toast = useToast();
   const [tab, setTab] = useState<BookingStatus>('upcoming');
   const [cancelling, setCancelling] = useState<Booking | null>(null);
@@ -129,11 +133,34 @@ export default function MyBookings() {
   return (
     <>
       <Seo title={t('meta.bookings.title')} description={t('meta.bookings.description')} noindex />
-      <PageHero title={t('bookings.title')} sub={t('bookings.sub')} crumbs={[{ label: t('nav.bookings') }]} compact />
+      <PageHero
+        title={t('bookings.title')}
+        sub={live ? t('bookings.subLive') : t('bookings.sub')}
+        crumbs={[{ label: t('nav.bookings') }]}
+        compact
+      />
       <section className="container-x py-10">
         <Tabs tabs={tabs} value={tab} onChange={setTab} label={t('bookings.title')} idBase="bk" />
         <div id="bk-panel" role="tabpanel" aria-labelledby={`bk-tab-${tab}`} className="mt-6">
-          {list.length === 0 ? (
+          {live && !loading && !user ? (
+            <EmptyState
+              icon={<ClipboardList className="size-7" />}
+              title={t('bookings.loginTitle')}
+              text={t('bookings.loginText')}
+              action={
+                <div className="flex flex-wrap justify-center gap-2">
+                  <ButtonLink to="/login?next=%2Fbookings">{t('nav.login')}</ButtonLink>
+                  <ButtonLink to="/signup?next=%2Fbookings" variant="secondary">
+                    {t('auth.signupLink')}
+                  </ButtonLink>
+                </div>
+              }
+            />
+          ) : live && (loading || syncing) ? (
+            <p className="py-10 text-center text-muted" role="status">
+              {t('common.loading')}
+            </p>
+          ) : list.length === 0 ? (
             <EmptyState
               icon={<ClipboardList className="size-7" />}
               title={t(`bookings.empty.${tab}`)}
@@ -146,12 +173,16 @@ export default function MyBookings() {
                   <BookingCard
                     b={b}
                     onCancel={setCancelling}
-                    onComplete={(x) => {
-                      updateBooking(x.id, { status: 'completed', completedAt: toISODate(new Date()) });
-                      toast(t('bookings.completedToast', { id: x.id }));
-                      track('booking_completed_demo', { id: x.id });
-                      setTab('completed');
-                    }}
+                    onComplete={
+                      live
+                        ? undefined
+                        : (x) => {
+                            void updateBooking(x.id, { status: 'completed', completedAt: toISODate(new Date()) });
+                            toast(t('bookings.completedToast', { id: x.id }));
+                            track('booking_completed_demo', { id: x.id });
+                            setTab('completed');
+                          }
+                    }
                   />
                 </li>
               ))}
@@ -170,9 +201,13 @@ export default function MyBookings() {
           </Button>
           <Button
             variant="danger"
-            onClick={() => {
+            onClick={async () => {
               if (!cancelling) return;
-              updateBooking(cancelling.id, { status: 'cancelled' });
+              if (!(await updateBooking(cancelling.id, { status: 'cancelled' }))) {
+                toast(t('bookings.updateError'), 'info');
+                setCancelling(null);
+                return;
+              }
               toast(t('bookings.cancelled', { id: cancelling.id }), 'info');
               track('booking_cancelled', { id: cancelling.id, free });
               setCancelling(null);

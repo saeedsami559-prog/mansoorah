@@ -8,6 +8,8 @@ import { ButtonLink, EmptyState } from '../components/ui/primitives';
 import { Avatar } from '../components/technician/Avatar';
 import { ServiceArt } from '../components/service/ServiceArt';
 import { useBooking } from '../components/booking/BookingContext';
+import { useToast } from '../components/ui/Toast';
+import { useAuth } from '../components/auth/AuthContext';
 import { getBookable, SERVICES } from '../data/services';
 import { getTechnician } from '../data/technicians';
 import { formatDate } from '../lib/format';
@@ -17,7 +19,9 @@ import { track } from '../lib/track';
 export default function RateService() {
   const { bookingId } = useParams();
   const { t, tl, loc, lang } = useI18n();
-  const { getBooking, updateBooking } = useBooking();
+  const { getBooking, updateBooking, syncing } = useBooking();
+  const toast = useToast();
+  const { live, user, loading } = useAuth();
   const booking = getBooking(bookingId);
   const [stars, setStars] = useState(0);
   const [hover, setHover] = useState(0);
@@ -36,6 +40,33 @@ export default function RateService() {
   );
   const seo = <Seo title={t('meta.rate.title')} description={t('meta.rate.description')} noindex />;
 
+  if (live && (loading || syncing)) {
+    return (
+      <>
+        {seo}
+        {header}
+        <p className="container-x py-12 text-center text-muted" role="status">
+          {t('common.loading')}
+        </p>
+      </>
+    );
+  }
+  if (live && !user) {
+    return (
+      <>
+        {seo}
+        {header}
+        <div className="container-x py-12">
+          <EmptyState
+            icon={<ListChecks className="size-7" />}
+            title={t('bookings.loginTitle')}
+            text={t('bookings.loginText')}
+            action={<ButtonLink to={`/login?next=${encodeURIComponent(`/rate/${bookingId}`)}`}>{t('nav.login')}</ButtonLink>}
+          />
+        </div>
+      </>
+    );
+  }
   if (!booking || booking.status !== 'completed') {
     return (
       <>
@@ -59,14 +90,17 @@ export default function RateService() {
   const shown = hover || stars;
   const suggestion = SERVICES.find((s) => s.slug !== booking.slug && tech.skills.includes(s.slug)) ?? SERVICES[0];
 
-  const submit = (e: FormEvent) => {
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
     if (!stars) {
       setError(true);
       document.getElementById('star-1')?.focus();
       return;
     }
-    updateBooking(booking.id, { rating: { stars, tags, text: text.trim(), at: toISODate(new Date()) } });
+    if (!(await updateBooking(booking.id, { rating: { stars, tags, text: text.trim(), at: toISODate(new Date()) } }))) {
+      toast(t('bookings.updateError'), 'info');
+      return;
+    }
     track('rating_submitted', { stars });
     setDone(true);
   };

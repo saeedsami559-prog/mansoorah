@@ -13,6 +13,9 @@ import { formatOmaniPhone } from '../lib/format';
 import { whatsappLink } from '../lib/whatsapp';
 import { isValidOmaniMobile } from '../lib/phone';
 import { writeJSON } from '../lib/storage';
+import { submitRequest } from '../lib/requests';
+import { useAuth } from '../components/auth/AuthContext';
+import { useToast } from '../components/ui/Toast';
 import { REGIONS } from '../data/regions';
 import { track } from '../lib/track';
 
@@ -27,6 +30,8 @@ type Values = z.infer<typeof schema>;
 
 export default function Contact() {
   const { t, tl, loc } = useI18n();
+  const { user, live } = useAuth();
+  const toast = useToast();
   const topics = tl('contact.topics');
   const [message, setMessage] = useState<string | null>(null);
   const {
@@ -39,9 +44,13 @@ export default function Contact() {
   });
   const err = (k?: string) => (k ? t(k as TKey) : undefined);
 
-  const onSubmit = (v: Values) => {
+  const onSubmit = async (v: Values) => {
     const msg = t('contact.waMessage', { name: v.name, phone: formatOmaniPhone(v.phone), topic: v.topic, message: v.message });
     writeJSON('contact', { ...v, at: new Date().toISOString() });
+    if (!(await submitRequest('contact', { ...v }, user?.id))) {
+      toast(t('common.sendError'), 'info');
+      return;
+    }
     track('contact_form');
     setMessage(msg);
   };
@@ -192,7 +201,7 @@ export default function Contact() {
                   {...register('message')}
                 />
               </Field>
-              <p className="text-sm text-muted sm:col-span-2">{t('common.consent')}</p>
+              <p className="text-sm text-muted sm:col-span-2">{live ? t('common.consentLive') : t('common.consent')}</p>
               <button type="submit" className="btn btn-primary btn-lg sm:col-span-2 sm:w-fit">
                 <Send className="flip-rtl size-5" aria-hidden="true" />
                 {t('contact.submit')}

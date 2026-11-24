@@ -29,24 +29,24 @@ export const LEGAL: Record<LegalDoc, LegalSection[]> = {
       ],
     },
     {
-      id: 'prototype',
-      title: { en: 'How this prototype handles your data', ar: 'كيف تتعامل هذه النسخة التجريبية مع بياناتك' },
+      id: 'now',
+      title: { en: 'How we handle your data today', ar: 'كيف نتعامل مع بياناتك حاليًا' },
       bullets: [
         {
-          en: 'Bookings, ratings and form entries are saved only in your own browser (local storage). They are not sent to any server.',
-          ar: 'تُحفظ الحجوزات والتقييمات وبيانات النماذج في متصفحك فقط (التخزين المحلي)، ولا تُرسل إلى أي خادم.',
+          en: 'When you create an account, your name, e-mail, mobile number and role are stored in our database (hosted by Supabase) so you can log in again from any device.',
+          ar: 'عند إنشاء حساب، يُحفظ اسمك وبريدك الإلكتروني ورقم هاتفك ونوع حسابك في قاعدة بياناتنا (المستضافة لدى Supabase) لتتمكن من الدخول مجددًا من أي جهاز.',
         },
         {
-          en: 'Nothing is shared unless you click “Send on WhatsApp” or “Send by e-mail”, which opens your own app with the message for you to review.',
-          ar: 'لا يُشارك شيء إلا إذا ضغطت «إرسال عبر واتساب» أو «إرسال بالبريد الإلكتروني»، فيُفتح تطبيقك الخاص بالرسالة لتراجعها بنفسك.',
+          en: 'Passwords are encrypted by our authentication provider. Mansoorah staff can never see your password.',
+          ar: 'تُشفَّر كلمات المرور لدى مزوّد خدمة الدخول، ولا يستطيع فريق منصورة الاطلاع على كلمة مرورك أبدًا.',
         },
         {
-          en: 'Demo log-in never stores your password. We keep only your display name and a one-way hash of your e-mail on your device.',
-          ar: 'لا يحفظ تسجيل الدخول التجريبي كلمة مرورك أبدًا، بل نحتفظ باسمك الظاهر وبصمة مشفّرة باتجاه واحد لبريدك الإلكتروني على جهازك فقط.',
+          en: 'Bookings, ratings, technician applications, partner requests and contact messages are stored in the same database and can only be read by you (your own bookings) and the Mansoorah admin.',
+          ar: 'تُحفظ الحجوزات والتقييمات وطلبات انضمام الفنيين وطلبات الشراكة ورسائل التواصل في قاعدة البيانات نفسها، ولا يطّلع عليها إلا أنت (لحجوزاتك) ومدير منصورة.',
         },
         {
-          en: 'No payments are taken and no card details are collected.',
-          ar: 'لا يتم تحصيل أي مدفوعات ولا جمع أي بيانات بطاقات.',
+          en: 'No online payments are taken yet and no card details are collected.',
+          ar: 'لا يتم تحصيل أي مدفوعات إلكترونية حاليًا ولا جمع أي بيانات بطاقات.',
         },
         {
           en: 'There are no third-party trackers or advertising cookies on this site.',
@@ -56,7 +56,7 @@ export const LEGAL: Record<LegalDoc, LegalSection[]> = {
     },
     {
       id: 'data',
-      title: { en: 'What data we will collect after launch', ar: 'البيانات التي سنجمعها بعد الإطلاق' },
+      title: { en: 'What data we collect', ar: 'البيانات التي نجمعها' },
       bullets: [
         {
           en: 'Contact details: name, mobile number and (optionally) e-mail.',
@@ -111,8 +111,8 @@ export const LEGAL: Record<LegalDoc, LegalSection[]> = {
       title: { en: 'How long we keep it', ar: 'مدة الاحتفاظ بالبيانات' },
       paragraphs: [
         {
-          en: 'We keep booking records only as long as needed for the service, the warranty and our legal and accounting obligations, then delete or anonymise them. On this prototype you can delete everything at any time by clearing this site’s data in your browser.',
-          ar: 'نحتفظ بسجلات الحجز فقط للمدة اللازمة لتقديم الخدمة والضمان والوفاء بالتزاماتنا القانونية والمحاسبية، ثم نحذفها أو نجعلها مجهولة الهوية. وفي هذه النسخة التجريبية يمكنك حذف كل شيء في أي وقت بمسح بيانات هذا الموقع من متصفحك.',
+          en: 'We keep booking records only as long as needed for the service, the warranty and our legal and accounting obligations, then delete or anonymise them. You can ask us to delete your account and data at any time through the Contact page.',
+          ar: 'نحتفظ بسجلات الحجز فقط للمدة اللازمة لتقديم الخدمة والضمان والوفاء بالتزاماتنا القانونية والمحاسبية، ثم نحذفها أو نجعلها مجهولة الهوية. ويمكنك طلب حذف حسابك وبياناتك في أي وقت عبر صفحة «تواصل معنا».',
         },
       ],
     },
@@ -139,8 +139,8 @@ export const LEGAL: Record<LegalDoc, LegalSection[]> = {
       title: { en: 'Security and breaches', ar: 'الأمان والاختراقات' },
       paragraphs: [
         {
-          en: 'After launch we will use encrypted connections, access controls and licensed payment providers. If a breach affects your data, we will notify the competent authority and you as the law requires.',
-          ar: 'بعد الإطلاق سنستخدم اتصالات مشفّرة وضوابط وصول ومزوّدي دفع مرخّصين. وإذا تأثرت بياناتك بأي اختراق، سنبلغ الجهة المختصة ونبلغك وفق ما يقتضيه القانون.',
+          en: 'We use encrypted connections, database access rules that limit each account to its own data, and (when payments go live) only licensed payment providers. If a breach affects your data, we will notify the competent authority and you as the law requires.',
+          ar: 'نستخدم اتصالات مشفّرة، وقواعد وصول تقصر كل حساب على بياناته فقط، و(عند تفعيل الدفع) مزوّدي دفع مرخّصين فقط. وإذا تأثرت بياناتك بأي اختراق، سنبلغ الجهة المختصة ونبلغك وفق ما يقتضيه القانون.',
         },
       ],
     },

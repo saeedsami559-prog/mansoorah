@@ -37,6 +37,8 @@ const routes = [
   { path: '/login', ...m.login, noindex: true },
   { path: '/signup', ...m.signup, noindex: true },
   { path: '/forgot-password', ...m.forgot, noindex: true },
+  { path: '/reset-password', ...m.reset, noindex: true },
+  { path: '/admin', ...m.admin, noindex: true },
   { path: '/privacy', ...m.privacy },
   { path: '/terms', ...m.terms },
   { path: '/cancellation-refund', ...m.cancellation },

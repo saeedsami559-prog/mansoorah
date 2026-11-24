@@ -137,10 +137,13 @@ export default function BookTechnician() {
   const title = loc(item.title);
   const ready = Boolean(tech && date && slot && isSlotBookable(tech.id, date, slot));
 
-  const onContinue = () => {
+  const onContinue = async () => {
     if (!ready || !tech || !slot) return;
     if (rescheduling) {
-      updateBooking(rescheduling.id, { date, slot });
+      if (!(await updateBooking(rescheduling.id, { date, slot }))) {
+        toast(t('bookings.updateError'), 'info');
+        return;
+      }
       track('booking_rescheduled', { id: rescheduling.id });
       toast(t('book.rescheduled', { date: formatDate(date, lang), time: formatSlot(slot, lang) }));
       navigate('/bookings');

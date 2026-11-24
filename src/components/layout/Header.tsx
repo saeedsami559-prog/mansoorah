@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { CalendarPlus, LogIn, LogOut, Menu, Moon, Sun, X, Languages } from 'lucide-react';
+import { CalendarPlus, LayoutDashboard, LogIn, LogOut, Menu, Moon, Sun, X, Languages } from 'lucide-react';
 import { useI18n, type TKey } from '../../i18n';
 import { Logo } from '../ui/Logo';
-import { getUser, signOut, type DemoUser } from '../../lib/auth';
+import { useAuth } from '../auth/AuthContext';
 import { initials } from '../../lib/format';
 import { useToast } from '../ui/Toast';
 import { useTheme } from './theme';
@@ -16,26 +16,12 @@ const NAV: { to: string; key: TKey; end?: boolean }[] = [
   { to: '/bookings', key: 'nav.bookings' },
 ];
 
-function useDemoUser(): DemoUser | null {
-  const [user, setUser] = useState<DemoUser | null>(() => getUser());
-  useEffect(() => {
-    const onChange = () => setUser(getUser());
-    window.addEventListener('mansoorah-auth', onChange);
-    window.addEventListener('storage', onChange);
-    return () => {
-      window.removeEventListener('mansoorah-auth', onChange);
-      window.removeEventListener('storage', onChange);
-    };
-  }, []);
-  return user;
-}
-
 export function Header() {
   const { t, toggle, lang } = useI18n();
   const { theme, toggleTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const user = useDemoUser();
+  const { user, signOut } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const toast = useToast();
@@ -54,8 +40,8 @@ export function Header() {
     return () => window.removeEventListener('keydown', onKey);
   }, [open]);
 
-  const logout = () => {
-    signOut();
+  const logout = async () => {
+    await signOut();
     toast(t('auth.loggedOut'), 'info');
     navigate('/');
   };
@@ -114,6 +100,12 @@ export function Header() {
           </button>
           {user ? (
             <div className="hidden items-center gap-1 md:flex">
+              {user.role === 'admin' && (
+                <Link to="/admin" className="btn btn-secondary btn-sm" data-testid="admin-link">
+                  <LayoutDashboard className="size-4" aria-hidden="true" />
+                  {t('nav.admin')}
+                </Link>
+              )}
               <span
                 className="grid size-9 place-items-center rounded-full bg-brand-700 text-sm font-bold text-on-brand"
                 title={t('nav.signedInAs', { name: user.name })}
@@ -175,6 +167,12 @@ export function Header() {
               ))}
             </ul>
             <div className="mt-3 grid grid-cols-2 gap-2 border-t border-line pt-3">
+              {user?.role === 'admin' && (
+                <Link to="/admin" className="btn btn-secondary col-span-2">
+                  <LayoutDashboard className="size-4" aria-hidden="true" />
+                  {t('nav.admin')}
+                </Link>
+              )}
               {user ? (
                 <button type="button" onClick={logout} className="btn btn-secondary">
                   <LogOut className="flip-rtl size-4" aria-hidden="true" />
