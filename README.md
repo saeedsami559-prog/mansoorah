@@ -77,10 +77,8 @@ Deep links work on GitHub Pages because the post-build step writes a real `index
 | Abdulrahman Fahad Said Saaiyid Alghammari | Customer Support & Content Coordinator |
 
 ## Before launch
-Values in `src/config/site.ts` are placeholders until the team provides them:
-- [ ] `WHATSAPP_NUMBER` – currently `96800000000` (an impossible number, so no stranger is messaged)
-- [ ] `PHONE_NUMBER` – currently `+96800000000`
-- [ ] `SUPPORT_EMAIL` – currently `hello@mansoorah.example` (reserved domain)
+Remaining items before a public launch:
+- [x] WhatsApp / phone `+968 9479 7747` and e-mail `saeedsami559@gmail.com` (set in `src/config/site.ts`)
 - [ ] `SOCIAL` handles – confirm/reserve, then set `SOCIAL_LINKS_LIVE = true`
 - [ ] Real technician data (with consent) to replace the fictional profiles; real reviews only from completed bookings
 - [ ] Final logo approval (current mark: `public/brand/mark.svg`)

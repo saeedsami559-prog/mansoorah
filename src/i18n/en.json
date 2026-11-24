@@ -624,8 +624,7 @@
     "doneTitle": "Message ready",
     "doneText": "Choose how to send it:",
     "waMessage": "Message to Mansoorah\nName: {name}\nMobile: {phone}\nTopic: {topic}\n\n{message}",
-    "errMessage": "Please write a short message (at least 10 characters).",
-    "placeholderNote": "Contact details will be finalised before launch."
+    "errMessage": "Please write a short message (at least 10 characters)."
   },
   "auth": {
     "welcomeBack": "Welcome Back!",

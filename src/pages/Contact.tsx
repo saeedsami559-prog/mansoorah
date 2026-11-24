@@ -120,7 +120,6 @@ export default function Contact() {
               <li>TikTok @{SOCIAL.tiktok}</li>
               <li>Snapchat @{SOCIAL.snapchat}</li>
             </ul>
-            <p className="mt-4 text-xs text-muted">{t('contact.placeholderNote')}</p>
           </div>
         </div>
 

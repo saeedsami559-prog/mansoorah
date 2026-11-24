@@ -22,7 +22,7 @@ A bilingual (EN/AR, full RTL) static website for **Mansoorah**, a UTAS UNEP2109 
 
 ## 3. AUDIT — safety and honesty
 - **Secrets/keys:** none in the repo (grep for keys, tokens, private keys: clean). No `.env` files.
-- **Private emails/phones:** none. Contact values are explicit placeholders (`+968 0000 0000` is an impossible Omani number; `hello@mansoorah.example` uses a reserved domain). Input placeholders use the pattern `9XXX XXXX`.
+- **Emails/phones:** only the team's official contact number (+968 9479 7747) and e-mail, published at the owner's request. Input placeholders use the pattern `9XXX XXXX`.
 - **Data sent without consent:** none. No backend, no analytics, no third-party scripts or font CDNs. Forms store locally and show a consent line; sending happens only when the visitor clicks a WhatsApp/e-mail button that opens their own app.
 - **Payments:** none. Online methods are labelled “Demo – no real payment is taken”.
 - **Passwords:** never stored (E2E test asserts the password and e-mail are absent from storage; only a SHA-256 hash of the e-mail is kept).

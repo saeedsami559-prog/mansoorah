@@ -1,16 +1,15 @@
 /**
- * Site-wide configuration. Contact values marked PLACEHOLDER have not been provided by the team yet;
- * they are listed under "Before launch" in README.md. The placeholder phone uses an impossible Omani
- * number (+968 0000 0000) and a reserved `.example` e-mail domain, so no message can reach a stranger.
+ * Site-wide configuration. Values marked PLACEHOLDER have not been provided by the team yet;
+ * they are listed under "Before launch" in README.md.
  */
 export const DEMO_MODE = true;
 
-/** PLACEHOLDER – replace with the real WhatsApp Business number (digits only, country code first). */
-export const WHATSAPP_NUMBER = '96800000000';
-/** PLACEHOLDER – replace with the real support line. */
-export const PHONE_NUMBER = '+96800000000';
-/** PLACEHOLDER – replace with the real support mailbox. */
-export const SUPPORT_EMAIL = 'hello@mansoorah.example';
+/** WhatsApp number (digits only, country code first). */
+export const WHATSAPP_NUMBER = '96894797747';
+/** Support phone line. */
+export const PHONE_NUMBER = '+96894797747';
+/** Support mailbox. */
+export const SUPPORT_EMAIL = 'saeedsami559@gmail.com';
 
 /** PLACEHOLDER – reserved handles; links are only rendered once SOCIAL_LINKS_LIVE is true. */
 export const SOCIAL = {
