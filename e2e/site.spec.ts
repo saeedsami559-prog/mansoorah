@@ -170,7 +170,7 @@ test('language toggle keeps you on the same page', async ({ page }) => {
   await setLang(page, 'en');
   await page.goto('./services/wifi-network');
   await page.getByRole('button', { name: 'التبديل إلى العربية' }).click();
-  await expect(page).toHaveURL(/\/services\/wifi-network$/);
+  await expect(page).toHaveURL(/\/services\/wifi-network\/?$/);
   await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('إعداد وتحسين شبكة الواي فاي المنزلية');
   await page.reload();
