@@ -47,7 +47,6 @@ for (const lang of ['en', 'ar'] as const) {
     await setLang(page, lang);
     await page.goto('./');
     await expect(page.locator('html')).toHaveAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-    await expect(page.locator('[data-demo-banner]')).toBeVisible();
 
     // Home → Services (via mobile menu)
     await page.getByRole('button', { name: s.menu }).click();

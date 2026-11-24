@@ -2,7 +2,6 @@ import { Suspense, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
-import { DemoBanner } from './DemoBanner';
 import { useI18n } from '../../i18n';
 import { InstallPrompt } from './InstallPrompt';
 import { track } from '../../lib/track';
@@ -38,7 +37,6 @@ export function Layout() {
       >
         {t('common.skip')}
       </a>
-      <DemoBanner />
       <Header />
       <main id="main" tabIndex={-1} className="flex-1 outline-none">
         <ErrorBoundary
